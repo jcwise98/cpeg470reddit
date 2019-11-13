@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Welcome to Firebase Hosting</title>
+  <title>Reddit</title>
 
   <!-- update the version number as needed -->
   <script defer src="/__/firebase/7.2.2/firebase-app.js"></script>
@@ -26,21 +26,21 @@
     <div id="formContent">
       <!-- Tabs Titles -->
 
-      <!-- Icon -->
+      <!-- Icon
       <div class="fadeIn first">
         <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-      </div>
+      </div> -->
 
       <!-- Login Form -->
       <form>
         <input id="login" type="submit" class="fadeIn fourth" value="Log In">
-        <a href="https://cpeg470-reddit.firebaseapp.com/mainpage.html"> Log in</a>
+        <!--<a href="https://cpeg470-reddit.firebaseapp.com/mainpage.html"> Log in</a>-->
       </form>
 
-      <!-- Remind Passowrd -->
+      <!-- Remind Passowrd
       <div id="formFooter">
         <a class="underlineHover" href="#">Forgot Password?</a>
-      </div>
+      </div>-->
 
     </div>
   </div>
@@ -55,6 +55,7 @@
         // The signed-in user info.
         var user = result.user;
         // ...
+
       }).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -66,16 +67,17 @@
         // ...
       });
 
-      firebase.auth().signInWithRedirect(provider);
+      /*firebase.auth().signInWithRedirect(provider);
 
       firebase.auth().getRedirectResult().then(function (result) {
         if (result.credential) {
           // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = result.credential.accessToken;
+          var token = result.credential.accessToken
           // ...
         }
         // The signed-in user info.
         var user = result.user;
+
       }).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -85,7 +87,9 @@
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
         // ...
-      });
+      });*/
+
+      //window.location.href = "https://cpeg470-reddit.firebaseapp.com/mainpage.html";
     });
   </script>
 
