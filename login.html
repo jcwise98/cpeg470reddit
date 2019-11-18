@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <title>Please enter your Username and Passowrd</title>
+    <title>Reddit</title>
 
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/7.0.0/firebase-app.js"></script>
@@ -24,7 +24,7 @@
     <style media="screen">
       body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
       #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: Blue; font-weight: bold; font-size: 25px; margin: 0 0 8px; }
+      #message h2 { color: DARKSLATEGRAY; font-weight: bold; font-size: 20px; margin: 0 0 8px; }
       #message h1 { font-size: 17px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
       #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
       #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
@@ -45,17 +45,19 @@
         <div class="col-md-4">
           <div class="thumbnail">
             <div class="card-body">
-              <img src="https://www.logolynx.com/images/logolynx/2d/2d298685d5adc7971890391c911ea5a7.jpeg" width="120" height="120" alt="UD logo" class="center">
-              <h2>Welcome To Like Minded </h2>
-              <h1>Are you logging in as a Student or Teacher?</h1>
-
-            <div class="clearfix">
-
-              <a href="https://likeminded.web.app/student-login.html"> I'm a Student</a>
-              <br>
-              <a href="https://likeminded.web.app/teacher-login.html"> <i class="fas fa-chalkboard-teacher"></i> I'm a Teacher</a>
-            </div>
+              <h2>Sign in</h2>
+                  <p>
+                     <label>Username </label>
+                     <input type = "text"
+                   id = "username"
+          </p>
+      <p>
+           <label>Password  </label>
+           <input type = "text"
+           id = "password"
+        </p>
           </div>
+           <button type="submit">Login</button>
         </div>
         </div>
     </div>
