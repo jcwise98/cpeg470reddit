@@ -22,7 +22,6 @@
 
   <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
-  <script src="fireBase.js"></script>
 </head>
 
 <body style="background-color:#F2F1F2">
@@ -116,7 +115,7 @@
 
     <div class="column">
       <div class="row">
-        <div id ="post" class="card">
+        <div id="post" class="card">
           Nothing seems to go right for young Kate, a frustrated Londoner who works as an elf in a year-round Christmas
           shop. But things soon take a turn for the better when she meets Tom -- a handsome charmer who seems too good
           to be true. As the city transforms into the most wonderful time of the year, Tom and Kate's growing attraction
@@ -132,6 +131,31 @@
 
 
     </div>
+  </div>
+</body>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBBj93-0ZUhkz31nT8u-lGD9982zP0Tf1Y",
+    authDomain: "cpeg470-reddit.firebaseapp.com",
+    databaseURL: "https://cpeg470-reddit.firebaseio.com",
+    projectId: "cpeg470-reddit",
+    storageBucket: "cpeg470-reddit.appspot.com",
+    messagingSenderId: "530492936109",
+    appId: "1:530492936109:web:cfeb7b01d2240ae48c1b24"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
+  let displayPosts = function(post) {
+    console.log(post);
+    $('#post').html(post);
+  }
 
-    <script>
+  firebase.database().ref("posts/post1").on("value", function(snapshot) {
+    let data = snapshot.val();
+    console.log("test");
+    displayPosts(data);
+  });
+</script>
+</html>

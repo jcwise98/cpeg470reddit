@@ -16,7 +16,7 @@
     $('#post').html(post);
   }
 
-  firebase.database().ref("posts").on("post1", function(snapshot) {
+  firebase.database().ref("posts/post1").on("value", function(snapshot) {
     let data = snapshot.val();
     console.log("test");
     displayPosts(data);
