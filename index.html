@@ -142,11 +142,9 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  let displayPosts = function (posts) {
-    //$('#post').html(post);
-    posts.forEach(function (post) {
-      readPost(post.val().text);
-    });
+  let displayPost = function (val, likeNum, id) {
+    var likeBtn = document.getElementById('button' + id);
+    likeBtn.innerHTML = likeNum;
   }
 
   let createPost = function (val) {
@@ -162,19 +160,29 @@
       //var newPostRef = postsRef.push();
       postsRef.update({
         text: val,
-        likes: 0
+        likes: 0,
+        id: nextPost
       });
       readPost(val);
     });
   }
 
-  let readPost = function (val) {
+  let readPost = function (val, likeNum, id) {
     var parentElement = document.getElementById('post_row');
     var br = document.createElement('br');
     var div = document.createElement('div');
     var span = document.createElement('span');
+    var likebtn = document.createElement('button');
     span.innerHTML = val;
+    likebtn.innerHTML = likeNum;
+    likebtn.setAttribute('style', 'background-color:green');
+    likebtn.addEventListener("click", function () {
+      firebase.database().ref("posts/" + id + '/likes').set(likeNum + 1);
+    });
     div.setAttribute('class', 'card');
+    likebtn.id = "button" + id;
+    console.log(likebtn.id);
+    div.appendChild(likebtn);
     div.appendChild(span);
     parentElement.appendChild(br);
     parentElement.appendChild(div);
@@ -186,8 +194,17 @@
 
   firebase.database().ref("posts").once("value", function (snapshot) {
     let data = snapshot.val();
-    displayPosts(snapshot);
+    snapshot.forEach(function (post) {
+      readPost(post.val().text, post.val().likes, post.val().id);
+    });
   });
+  firebase.database().ref("posts").on("value", function (snapshot) {
+    let data = snapshot.val();
+    snapshot.forEach(function (post) {
+      displayPost(post.val().text, post.val().likes, post.val().id);
+    });
+  });
+
 </script>
 
 </html>
