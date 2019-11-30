@@ -18,5 +18,6 @@
 
   firebase.database().ref("posts").on("post1", function(snapshot) {
     let data = snapshot.val();
+    console.log("test");
     displayPosts(data);
   });
