@@ -142,12 +142,16 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  let displayPosts = function(post) {
-    $('#post').html(post);
+  let displayPosts = function(posts) {
+    //$('#post').html(post);
+    console.log(posts);
   }
 
   let createPost = function(val) {
-    //firebase.database().ref("posts/post1").set(val);
+    firebase.database().ref("posts/post1").set(val);
+  }
+
+  let readPost = function(val) {
     var parentElement = document.getElementById('post_row');
     var br = document.createElement('br');
     var div = document.createElement('div');
@@ -163,7 +167,7 @@
     createPost($('#createpost').val());
   });
 
-  firebase.database().ref("posts/post1").on("value", function(snapshot) {
+  firebase.database().ref("posts").on("value", function(snapshot) {
     let data = snapshot.val();
     displayPosts(data);
   });
