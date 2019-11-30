@@ -12,10 +12,11 @@
   firebase.initializeApp(firebaseConfig);
 
   let displayPosts = function(post) {
+    console.log(post);
     $('#post').html(post);
   }
 
-  firebase.database().reg("posts").on("post1", function(snapshot) {
+  firebase.database().ref("posts").on("post1", function(snapshot) {
     let data = snapshot.val();
     displayPosts(data);
   });
