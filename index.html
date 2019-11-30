@@ -101,9 +101,9 @@
 
 
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Create Post" name="search">
+    <input id="createpost" type="text" class="form-control" placeholder="Create Post" name="search">
   </div>
-  <button class="btn btn-default" type="button"
+  <button id="postbutton" class="btn btn-default" type="button"
     onclick="document.getElementById('modal-logout').style.display='block'">Post <img
       src="https://icons-for-free.com/iconfiles/png/512/facebook+pencil+write+post+icon-1320166641210096755.png"
       alt="logo" class="logoo"></button>
@@ -148,13 +148,19 @@
   firebase.initializeApp(firebaseConfig);
 
   let displayPosts = function(post) {
-    console.log(post);
     $('#post').html(post);
   }
 
+  let setPost = function(val) {
+    firebase.database().ref("posts/post1").set(val);
+  }
+
+  $(postbutton).on("click", function() {
+    setPost($('#createpost').val());
+  });
+
   firebase.database().ref("posts/post1").on("value", function(snapshot) {
     let data = snapshot.val();
-    console.log("test");
     displayPosts(data);
   });
 </script>
