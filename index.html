@@ -114,7 +114,7 @@
   <div class="container">
 
     <div class="column">
-      <div class="row">
+      <div id="post_row" class="row">
         <div class="card">
           <span id="post"></span>
           <br>
@@ -148,7 +148,7 @@
 
   let createPost = function(val) {
     //firebase.database().ref("posts/post1").set(val);
-    var parentElement = document.getElementByClassName('.row');
+    var parentElement = document.getElementById('post_row');
     var childElement = document.createElement('div');
     childElement.setAttribute('class', 'card');
     parentElement.appendChild(childElement)
