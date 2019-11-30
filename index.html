@@ -115,11 +115,8 @@
 
     <div class="column">
       <div class="row">
-        <div id="post" class="card">
-          Nothing seems to go right for young Kate, a frustrated Londoner who works as an elf in a year-round Christmas
-          shop. But things soon take a turn for the better when she meets Tom -- a handsome charmer who seems too good
-          to be true. As the city transforms into the most wonderful time of the year, Tom and Kate's growing attraction
-          turns into the best gift of all -- a Yuletide romance.
+        <div class="card">
+          <span id="post"></span>
           <br>
           <span class="likebtn-wrapper" data-theme="custom" data-icon_l="thmb8-u" data-icon_d="thmb8-d"
             data-icon_l_c_v="#528d41" data-icon_d_c_v="#fb0505" data-white_label="true" data-rich_snippet="true"
@@ -151,12 +148,12 @@
     $('#post').html(post);
   }
 
-  let setPost = function(val) {
+  let createPost = function(val) {
     firebase.database().ref("posts/post1").set(val);
   }
 
   $(postbutton).on("click", function() {
-    setPost($('#createpost').val());
+    createPost($('#createpost').val());
   });
 
   firebase.database().ref("posts/post1").on("value", function(snapshot) {
