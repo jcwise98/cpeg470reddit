@@ -149,6 +149,7 @@
   let createPost = function(val) {
     //firebase.database().ref("posts/post1").set(val);
     var parentElement = document.getElementById('post_row');
+    var childElement = document.createElement('br');
     var childElement = document.createElement('div');
     childElement.setAttribute('class', 'card');
     parentElement.appendChild(childElement)
