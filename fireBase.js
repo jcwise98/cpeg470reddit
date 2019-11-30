@@ -10,3 +10,12 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+
+  let displayPosts = function(post) {
+    $(`post`).html(post);
+  }
+
+  firebase.database().reg("posts").on("post1", function(snapshot) {
+    let data = snapshot.val();
+    displayPosts(data);
+  });
