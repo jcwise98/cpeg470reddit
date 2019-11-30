@@ -125,8 +125,6 @@
           <script>(function (d, e, s) { if (d.getElementById("likebtn_wjs")) return; a = d.createElement(e); m = d.getElementsByTagName(e)[0]; a.async = 1; a.id = "likebtn_wjs"; a.src = s; m.parentNode.insertBefore(a, m) })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>
         </div>
       </div>
-
-
     </div>
   </div>
 </body>
@@ -149,7 +147,11 @@
   }
 
   let createPost = function(val) {
-    firebase.database().ref("posts/post1").set(val);
+    //firebase.database().ref("posts/post1").set(val);
+    var parentElement = document.getElementByClassName('.row');
+    var childElement = document.createElement('div');
+    childElement.setAttribute('class', 'card');
+    parentElement.appendChild(childElement)
   }
 
   $(postbutton).on("click", function() {
