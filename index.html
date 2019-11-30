@@ -149,10 +149,14 @@
   let createPost = function(val) {
     //firebase.database().ref("posts/post1").set(val);
     var parentElement = document.getElementById('post_row');
-    var childElement = document.createElement('br');
-    var childElement = document.createElement('div');
-    childElement.setAttribute('class', 'card');
-    parentElement.appendChild(childElement)
+    var br = document.createElement('br');
+    var div = document.createElement('div');
+    var span = document.createElement('span');
+    span.innerHTML = "test";
+    div.setAttribute('class', 'card');
+    div.appendChild(span);
+    parentElement.appendChild(br);
+    parentElement.appendChild(div);
   }
 
   $(postbutton).on("click", function() {
