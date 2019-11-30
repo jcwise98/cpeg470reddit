@@ -115,7 +115,7 @@
 
     <div class="column">
       <div id="post_row" class="row">
-        <div class="card">
+        <!--<div class="card">
           <span id="post"></span>
           <br>
           <span class="likebtn-wrapper" data-theme="custom" data-icon_l="thmb8-u" data-icon_d="thmb8-d"
@@ -123,7 +123,7 @@
             data-identifier="item_1" data-show_like_label="false" data-share_enabled="false"
             data-share_size="small"></span>
           <script>(function (d, e, s) { if (d.getElementById("likebtn_wjs")) return; a = d.createElement(e); m = d.getElementsByTagName(e)[0]; a.async = 1; a.id = "likebtn_wjs"; a.src = s; m.parentNode.insertBefore(a, m) })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -142,18 +142,33 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  let displayPosts = function(posts) {
+  let displayPosts = function (posts) {
     //$('#post').html(post);
-    posts.forEach(function(post) {
-      readPost(post.val());
+    posts.forEach(function (post) {
+      readPost(post.val().text);
     });
   }
 
-  let createPost = function(val) {
-    firebase.database().ref("posts/post1").set(val);
+  let createPost = function (val) {
+    var rootRef = firebase.database().ref();
+    var nextPost;
+    rootRef.child("numPosts").once("value", function (snapshot) {
+      var data = snapshot.val();
+      data++;
+      nextPost = data;
+      firebase.database().ref("numPosts").set(nextPost);
+
+      var postsRef = rootRef.child('posts/' + nextPost);
+      //var newPostRef = postsRef.push();
+      postsRef.update({
+        text: val,
+        likes: 0
+      });
+      readPost(val);
+    });
   }
 
-  let readPost = function(val) {
+  let readPost = function (val) {
     var parentElement = document.getElementById('post_row');
     var br = document.createElement('br');
     var div = document.createElement('div');
@@ -165,13 +180,14 @@
     parentElement.appendChild(div);
   }
 
-  $(postbutton).on("click", function() {
+  $(postbutton).on("click", function () {
     createPost($('#createpost').val());
   });
 
-  firebase.database().ref("posts").on("value", function(snapshot) {
+  firebase.database().ref("posts").once("value", function (snapshot) {
     let data = snapshot.val();
-    displayPosts(data);
+    displayPosts(snapshot);
   });
 </script>
+
 </html>
