@@ -144,7 +144,9 @@
 
   let displayPosts = function(posts) {
     //$('#post').html(post);
-    console.log(posts);
+    posts.forEach(function(post) {
+      readPost(post.val());
+    });
   }
 
   let createPost = function(val) {
@@ -156,7 +158,7 @@
     var br = document.createElement('br');
     var div = document.createElement('div');
     var span = document.createElement('span');
-    span.innerHTML = "test";
+    span.innerHTML = val;
     div.setAttribute('class', 'card');
     div.appendChild(span);
     parentElement.appendChild(br);
