@@ -175,7 +175,7 @@
     var likebtn = document.createElement('button');
     span.innerHTML = val;
     likebtn.innerHTML = likeNum;
-    likebtn.setAttribute('style', 'background-color:honeydew');
+    likebtn.setAttribute('style', 'background-color:#B7E992');
     likebtn.addEventListener("click", function () {
       firebase.database().ref("posts/" + id + '/likes').set(likeNum + 1);
     });
