@@ -175,7 +175,8 @@
     var likebtn = document.createElement('button');
     span.innerHTML = val;
     likebtn.innerHTML = likeNum;
-    likebtn.setAttribute('style', 'background: url('https://cdn.iconscout.com/icon/premium/png-256-thumb/up-arrow-1733798-1478601.png') no-repeat;');
+    likebtn.setAttribute('style','background-color:#EFF9F8');
+    likebtn.setAttribute('class', 'likeButton');
     likebtn.addEventListener("click", function () {
       firebase.database().ref("posts/" + id + '/likes').set(likeNum + 1);
     });

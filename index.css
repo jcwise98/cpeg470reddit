@@ -1,3 +1,12 @@
+.likeButton{
+ background-image: url(https://icon-library.net/images/arrow-up-icon/arrow-up-icon-28.jpg);
+background-repeat: no-repeat;
+background-position: right;
+background-size: 20px;
+padding-right: 22px;
+
+}
+
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
