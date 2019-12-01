@@ -177,12 +177,19 @@
     likebtn.innerHTML = likeNum;
     likebtn.setAttribute('style','background-color:#EFF9F8');
     likebtn.setAttribute('class', 'likeButton');
+    var deletebtn = document.createElement('button');
+    deletebtn.setAttribute('style', 'background-color: #FCC2BB  ');
+    deletebtn.setAttribute('class', 'deleteButton');
+    deletebtn.innerHTML= "Delete Post";
+
+
     likebtn.addEventListener("click", function () {
       firebase.database().ref("posts/" + id + '/likes').set(likeNum + 1);
     });
     div.setAttribute('class', 'card');
     likebtn.id = "button" + id;
     console.log(likebtn.id);
+    div.appendChild(deletebtn);
     div.appendChild(likebtn);
     div.appendChild(span);
     parentElement.appendChild(br);
