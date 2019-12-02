@@ -1,11 +1,14 @@
 .postbtn{
   background-color: #E4EFFE;
   font-family: 'Oswald';
+  margin-left: 15px;
 }
 
 .form-control{
   width: 450px;
   height: auto;
+  margin-left:  8px;
+
 
 }
 
