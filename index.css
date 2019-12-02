@@ -1,3 +1,13 @@
+.postbtn{
+  background-color: #B0C4DE;
+}
+
+.form-control{
+  width: 450px;
+  height: auto;
+
+}
+
 .deleteButton{
   float: right;
   background-image: url(https://cdn3.iconfinder.com/data/icons/arrow-and-object/30/throw_it_in_the_trash-512.png);
