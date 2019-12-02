@@ -10,19 +10,22 @@
 
 
 .likeButton{
- background-image: url(https://cdn4.iconfinder.com/data/icons/flat-design-basic-set-10-1/24/symbol-arrow-up-blue-direction-512.png);
-background-repeat: no-repeat;
-background-position: right;
-background-size: 20px;
-padding-right: 22px;
+  background-image: url(https://cdn1.iconfinder.com/data/icons/basic-ui-elements-color-round/3/25-512.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 20px;
+  padding-right: 22px;
+
 
 }
 .dislikeButton{
-  background-image: url(https://cdn4.iconfinder.com/data/icons/flat-design-basic-set-10-1/24/symbol-arrow-down-blue-direction-512.png);
- background-repeat: no-repeat;
- background-position: right;
- background-size: 20px;
- padding-right: 22px;
+  background-image: url(https://cdn1.iconfinder.com/data/icons/basic-ui-elements-color-round/3/14-512.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+  padding-right: 22px;
+  padding-top: 16px;
+  padding-bottom: 7px;
 
  }
 
