@@ -163,7 +163,9 @@
         likes: 0,
         id: nextPost
       });
-      readPost(val);
+      //readPost(val);
+      alert("Post has been added!");
+      location.reload();
     });
   }
 
@@ -187,6 +189,15 @@
       firebase.database().ref("posts/" + id + '/likes').once("value", function (snapshot) {
         let data = snapshot.val();
         firebase.database().ref("posts/" + id + '/likes').set(data + 1);
+      });
+    });
+    deletebtn.addEventListener("click", function () {
+      firebase.database().ref("posts/" + id).remove();
+      firebase.database().ref("numPosts").once("value", function (snapshot) {
+        let data = snapshot.val();
+        firebase.database().ref("numPosts").set(--data);
+        alert("Post has been deleted!");
+        location.reload();
       });
     });
     div.setAttribute('class', 'card');
