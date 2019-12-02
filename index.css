@@ -1,4 +1,5 @@
 .deleteButton{
+  float: right;
   background-image: url(https://cdn3.iconfinder.com/data/icons/arrow-and-object/30/throw_it_in_the_trash-512.png);
   background-repeat: no-repeat;
   background-position: right;
@@ -22,7 +23,7 @@ padding-right: 22px;
  background-position: right;
  background-size: 20px;
  padding-right: 22px;
- 
+
  }
 
 
