@@ -2,6 +2,11 @@
   background-color: #E4EFFE;
   font-family: 'Oswald';
   margin-left: 15px;
+  box-shadow:inset 0px 1px 0px 0px #dcecfb;
+  background:linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
+  font-weight:bold;
+  border-radius:4px;
+
 }
 
 .form-control{
@@ -20,6 +25,10 @@
   background-size: 20px;
   padding-right: 22px;
   font-family: 'Oswald';
+  font-weight:bold;
+  border-radius:4px;
+
+
 }
 
 
@@ -30,6 +39,7 @@
   background-position: right;
   background-size: 20px;
   padding-right: 22px;
+  border-radius:4px;
 
 
 }
@@ -41,6 +51,7 @@
   padding-right: 22px;
   padding-top: 16px;
   padding-bottom: 7px;
+  border-radius:4px;
 
  }
 
