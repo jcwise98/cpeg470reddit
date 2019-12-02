@@ -173,10 +173,25 @@
     var parentElement = document.getElementById('post_row');
     var br = document.createElement('br');
     var div = document.createElement('div');
+    var div2 = document.createElement('div');
     var span = document.createElement('span');
+    var spanDate = document.createElement('span');
     var likebtn = document.createElement('button');
     span.innerHTML = val;
-    likebtn.innerHTML = likeNum;
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+    var today = mm + '/' + dd + '/' + yyyy;
+    spanDate.innerHTML = today;
+      likebtn.innerHTML = likeNum;
     likebtn.setAttribute('style', 'background-color:#EFF9F8');
     likebtn.setAttribute('class', 'likeButton');
     var deletebtn = document.createElement('button');
@@ -204,8 +219,11 @@
     likebtn.id = "button" + id;
     console.log(likebtn.id);
 
-    div.appendChild(likebtn);
-    div.appendChild(deletebtn);
+    div2.appendChild(likebtn);
+    div2.appendChild(deletebtn);
+    div2.appendChild(spanDate);
+    div2.appendChild(br);
+    div.appendChild(div2);
     div.appendChild(span);
     parentElement.appendChild(br);
     parentElement.appendChild(div);
