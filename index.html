@@ -142,7 +142,7 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  let displayPost = function (val, likeNum, id) {
+  let displayPost = function (val, likeNum, id, date) {
     var likeBtn = document.getElementById('button' + id);
     likeBtn.innerHTML = likeNum;
   }
@@ -158,10 +158,30 @@
 
       var postsRef = rootRef.child('posts/' + nextPost);
       //var newPostRef = postsRef.push();
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1; //January is 0!
+
+      var yyyy = today.getFullYear();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      m = checkTime(m);
+      function checkTime(i) {
+        if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+        return i;
+      }
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+      var today = mm + '/' + dd + '/' + yyyy + " " + h + ":" + m;
       postsRef.update({
         text: val,
         likes: 0,
-        id: nextPost
+        id: nextPost,
+        date: today
       });
       //readPost(val);
       alert("Post has been added!");
@@ -169,7 +189,7 @@
     });
   }
 
-  let readPost = function (val, likeNum, id) {
+  let readPost = function (val, likeNum, id, today) {
     var parentElement = document.getElementById('post_row');
     var br = document.createElement('br');
     var div = document.createElement('div');
@@ -179,18 +199,7 @@
     var likebtn = document.createElement('button');
     var dislikebtn = document.createElement('button');
     span.innerHTML = val;
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
 
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-      dd = '0' + dd;
-    }
-    if (mm < 10) {
-      mm = '0' + mm;
-    }
-    var today = mm + '/' + dd + '/' + yyyy;
     spanDate.innerHTML = today;
     likebtn.innerHTML = likeNum;
     likebtn.setAttribute('style', 'background-color:#EFF9F8');
@@ -246,13 +255,13 @@
   firebase.database().ref("posts").once("value", function (snapshot) {
     let data = snapshot.val();
     snapshot.forEach(function (post) {
-      readPost(post.val().text, post.val().likes, post.val().id);
+      readPost(post.val().text, post.val().likes, post.val().id,post.val().date);
     });
   });
   firebase.database().ref("posts").on("value", function (snapshot) {
     let data = snapshot.val();
     snapshot.forEach(function (post) {
-      displayPost(post.val().text, post.val().likes, post.val().id);
+      displayPost(post.val().text, post.val().likes, post.val().id, post.val().date);
     });
   });
 
