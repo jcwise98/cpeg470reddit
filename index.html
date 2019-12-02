@@ -177,6 +177,7 @@
     var span = document.createElement('span');
     var spanDate = document.createElement('span');
     var likebtn = document.createElement('button');
+    var dislikebtn = document.createElement('button');
     span.innerHTML = val;
     var today = new Date();
     var dd = today.getDate();
@@ -191,9 +192,12 @@
     }
     var today = mm + '/' + dd + '/' + yyyy;
     spanDate.innerHTML = today;
-      likebtn.innerHTML = likeNum;
+    likebtn.innerHTML = likeNum;
     likebtn.setAttribute('style', 'background-color:#EFF9F8');
     likebtn.setAttribute('class', 'likeButton');
+    dislikebtn.setAttribute('style', 'background-color:#EFF9F8');
+    dislikebtn.setAttribute('class', 'dislikeButton');
+    dislikebtn.innerHTML = "test";
     var deletebtn = document.createElement('button');
     deletebtn.setAttribute('style', 'background-color: #FCC2BB  ');
     deletebtn.setAttribute('class', 'deleteButton');
@@ -204,6 +208,12 @@
       firebase.database().ref("posts/" + id + '/likes').once("value", function (snapshot) {
         let data = snapshot.val();
         firebase.database().ref("posts/" + id + '/likes').set(data + 1);
+      });
+    });
+    dislikebtn.addEventListener("click", function () {
+      firebase.database().ref("posts/" + id + '/likes').once("value", function (snapshot) {
+        let data = snapshot.val();
+        firebase.database().ref("posts/" + id + '/likes').set(data - 1);
       });
     });
     deletebtn.addEventListener("click", function () {
@@ -220,6 +230,7 @@
     console.log(likebtn.id);
 
     div2.appendChild(likebtn);
+    div2.appendChild(dislikebtn);
     div2.appendChild(deletebtn);
     div2.appendChild(spanDate);
     div2.appendChild(br);

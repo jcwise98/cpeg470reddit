@@ -16,6 +16,15 @@ background-size: 20px;
 padding-right: 22px;
 
 }
+.dislikeButton{
+  background-image: url(https://cdn4.iconfinder.com/data/icons/flat-design-basic-set-10-1/24/symbol-arrow-down-blue-direction-512.png);
+ background-repeat: no-repeat;
+ background-position: right;
+ background-size: 20px;
+ padding-right: 22px;
+ 
+ }
+
 
 /* The Modal (background) */
 .modal {
