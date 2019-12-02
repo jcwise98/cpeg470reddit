@@ -1,3 +1,19 @@
+
+.attachimg{
+    width: 20px;
+}
+.attachButton{
+  margin-left: 10px;
+  border-radius:4px;
+  font-weight: bold;
+  background-position: right;
+  font-family: 'Oswald';
+  border-color: #dcecfb;
+  border-width: medium;
+
+
+
+}
 .postbtn{
   background-color: #E4EFFE;
   font-family: 'Oswald';
