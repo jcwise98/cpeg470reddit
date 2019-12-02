@@ -133,6 +133,8 @@ body {
 
 /* Float four columns side by side */
 .row {
+  display: flex;
+  flex-direction: column-reverse;
   float: center;
   width: 70%;
   padding: 20px;
