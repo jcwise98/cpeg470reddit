@@ -72,10 +72,10 @@
                 <label for="email"><b><img
                       src="https://icon-library.net/images/anonymous-avatar-icon/anonymous-avatar-icon-7.jpg"
                       alt="Avatar" class="logo"> Email</b></label>
-                <input type="email" placeholder="Enter Email" name="email" required>
+                <input class="email" type="email" placeholder="Enter Email" name="email" required>
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input class="password" type="password" placeholder="Enter Password" name="psw" required>
 
                 <button type="submit">Login</button>
               </div>
@@ -87,15 +87,14 @@
           </div>
         </div>
 
-        <button class="btn btn-default" type="button"
+        <button id="logoutBtn" class="btn btn-default" type="button"
           onclick="document.getElementById('modal-logout').style.display='block'">Logout <img
             src="https://icon-library.net/images/log-out-icon/log-out-icon-10.jpg" alt="logo" class="logoo"></button>
       </ul>
       <ul class="nav navbar-nav navbar-right">
 
         <button class="btn btn-default" onclick="document.getElementById('id02').style.display='block'">Register <img
-            src="http://cdn.onlinewebfonts.com/svg/img_355097.png"
-            alt="logo" class="logoo"></button>
+            src="http://cdn.onlinewebfonts.com/svg/img_355097.png" alt="logo" class="logoo"></button>
         <!-- The Modal -->
         <div id="id02" class="modal">
           <span onclick="document.getElementById('id02').style.display='none'" class="close"
@@ -284,10 +283,6 @@
     parentElement.appendChild(div);
   }
 
-  $(postbutton).on("click", function () {
-    createPost($('#createpost').val());
-  });
-
   firebase.database().ref("posts").once("value", function (snapshot) {
     let data = snapshot.val();
     snapshot.forEach(function (post) {
@@ -316,6 +311,47 @@
       .catch(function (err) {
         console.log(err);
       });
+  });
+
+  $(".login form").on("submit", function (event) {
+    event.preventDefault();
+
+    var email = $(".login .email").val();
+    var password = $(".login .password").val();
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(function (user) {
+        console.log(user);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  });
+
+  $(logoutBtn).on("click", function () {
+    firebase.auth().signOut().then(function () {
+      // Sign-out successful.
+    }).catch(function (error) {
+      // An error happened.
+    });
+  });
+
+  firebase.auth().onAuthStateChanged(function (user) {
+
+    $(postbutton).off();
+
+    if (user) {
+      console.log(user);
+      $(postbutton).on("click", function () {
+        createPost($('#createpost').val());
+      });
+    } else {
+      // No user is signed in.
+      console.log("No user");
+      $(postbutton).on("click", function () {
+        alert("Please log in first!");
+      });
+    }
   });
 </script>
 
