@@ -22,6 +22,7 @@
 
   <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
 </head>
 
 <body style="background-color:#F2F1F2">
@@ -67,24 +68,32 @@
             </div>
 
             <div class="container">
-              <label for="uname"><b><img
+              <label for="email"><b><img
                     src="https://icon-library.net/images/anonymous-avatar-icon/anonymous-avatar-icon-7.jpg" alt="Avatar"
-                    class="logo"> Username</b></label>
-              <input type="text" placeholder="Enter Username" name="uname" required>
+                    class="logo"> Email</b></label>
+              <input type="text" placeholder="Enter Email" name="email" required>
 
               <label for="psw"><b>Password</b></label>
               <input type="password" placeholder="Enter Password" name="psw" required>
 
               <button type="submit">Login</button>
-              <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-              </label>
             </div>
+
+            <div class="container">
+                <label for="email"><b><img
+                      src="https://icon-library.net/images/anonymous-avatar-icon/anonymous-avatar-icon-5.jpg" alt="Avatar"
+                      class="logo"> Sign Up</b></label>
+                <input type="text" placeholder="Register Email" name="email" required>
+  
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+  
+                <button type="submit">Register</button>
+              </div>
 
             <div class="container" style="background-color:#f1f1f1">
               <button type="button" onclick="document.getElementById('id01').style.display='none'"
                 class="cancelbtn">Cancel</button>
-              <span class="psw">Forgot <a href="#">password?</a></span>
             </div>
           </form>
         </div>
@@ -268,6 +277,13 @@
       displayPost(post.val().text, post.val().likes, post.val().id, post.val().date);
     });
   });
+
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+});
 
 </script>
 
