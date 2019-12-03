@@ -2,12 +2,17 @@
   background-color: #E4EFFE;
   font-family: 'Oswald';
   box-shadow:inset 0px 1px 0px 0px #dcecfb;
-  background:linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
   font-weight:bold;
   border-radius:4px;
   float: right;
   margin-top: 3px;
   margin-left:auto;
+  background-image: url(https://c7.uihere.com/icons/7/366/410/font-comments-7a9cd8946b98da8c5afe8d4ad77993a5.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 20px;
+  padding-right: 22px;
+    background-color: #E4EFFE;
 
 }
 .commentSection{
