@@ -180,23 +180,8 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  let displayPost = function (val, likeNum, id, date) {
-    var likeBtn = document.getElementById('button' + id);
-    likeBtn.innerHTML = likeNum;
-  }
-
-  let createPost = function (val, emailAddr) {
-    var rootRef = firebase.database().ref();
-    var nextPost;
-    rootRef.child("numPosts").once("value", function (snapshot) {
-      var data = snapshot.val();
-      data++;
-      nextPost = data;
-      firebase.database().ref("numPosts").set(nextPost);
-
-      var postsRef = rootRef.child('posts/' + nextPost);
-      //var newPostRef = postsRef.push();
-      var today = new Date();
+  let returnCurrentDate = function() {
+    var today = new Date();
       var dd = today.getDate();
       var mm = today.getMonth() + 1; //January is 0!
 
@@ -215,6 +200,26 @@
         mm = '0' + mm;
       }
       var today = mm + '/' + dd + '/' + yyyy + " " + h + ":" + m;
+      return today;
+  }
+
+  let displayPost = function (val, likeNum, id, date) {
+    var likeBtn = document.getElementById('button' + id);
+    likeBtn.innerHTML = likeNum;
+  }
+
+  let createPost = function (val, emailAddr) {
+    var rootRef = firebase.database().ref();
+    var nextPost;
+    rootRef.child("numPosts").once("value", function (snapshot) {
+      var data = snapshot.val();
+      data++;
+      nextPost = data;
+      firebase.database().ref("numPosts").set(nextPost);
+
+      var postsRef = rootRef.child('posts/' + nextPost);
+      //var newPostRef = postsRef.push();
+      var today = returnCurrentDate();
       postsRef.update({
         text: val,
         likes: 0,
@@ -279,10 +284,29 @@
       firebase.database().ref("posts/" + id).remove();
       firebase.database().ref("numPosts").once("value", function (snapshot) {
         let data = snapshot.val();
-        firebase.database().ref("numPosts").set(--data);
+        if (data == id) {
+          firebase.database().ref("numPosts").set(--data);
+        }
         alert("Post has been deleted!");
         location.reload();
       });
+    });
+    cmntbtn.addEventListener("click", function () {
+      var user = firebase.auth().currentUser;
+
+      if (user) {
+        var today = returnCurrentDate();
+        // User is signed in.
+        var CmntRef = firebase.database().ref("posts/" + id).push();
+        CmntRef.update({
+        text: "comment",
+        date: today,
+        email: email
+      });
+      } else {
+        // No user is signed in.
+        alert("Please log in first!");
+      }
     });
     div.setAttribute('class', 'card');
     likebtn.id = "button" + id;
@@ -334,7 +358,7 @@
       .catch(function (err) {
         console.log(err);
       });
-      //location.reload();
+    //location.reload();
   });
 
   $(".login form").on("submit", function (event) {
@@ -350,7 +374,7 @@
       .catch(function (err) {
         console.log(err);
       });
-      //location.reload();
+    //location.reload();
   });
 
   $(logoutBtn).on("click", function () {
