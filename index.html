@@ -236,6 +236,8 @@
     var spanUser = document.createElement('span');
     var likebtn = document.createElement('button');
     var dislikebtn = document.createElement('button');
+    var comment = document.createElement('input');
+    var deletebtn = document.createElement('button');
     span.innerHTML = val;
 
     spanDate.innerHTML = today;
@@ -245,10 +247,13 @@
     likebtn.setAttribute('class', 'likeButton');
     dislikebtn.setAttribute('style', 'background-color:#FEDDDD');
     dislikebtn.setAttribute('class', 'dislikeButton');
-    var deletebtn = document.createElement('button');
     deletebtn.setAttribute('style', 'background-color: #ECEBEB');
     deletebtn.setAttribute('class', 'deleteButton');
+    comment.setAttribute('class', 'commentSection');
+    comment.setAttribute('type', 'text');
+    comment.setAttribute('value', 'default');
     deletebtn.innerHTML = "Delete Post";
+    comment.innerHTML = "Comment Here";
 
 
     likebtn.addEventListener("click", function () {
@@ -280,6 +285,7 @@
     div2.appendChild(dislikebtn);
     div2.appendChild(deletebtn);
     div2.appendChild(br);
+    div2.appendChild(comment);
     div.appendChild(spanUser);
     div.appendChild(div2);
     div.appendChild(span);
