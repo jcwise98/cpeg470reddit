@@ -230,14 +230,15 @@
     var br = document.createElement('br');
     var div = document.createElement('div');
     var div2 = document.createElement('div');
+    var div3 = document.createElement('div');
     var divDate = document.createElement('div');
     var span = document.createElement('span');
     var spanDate = document.createElement('span');
     var spanUser = document.createElement('span');
     var likebtn = document.createElement('button');
     var dislikebtn = document.createElement('button');
-    var comment = document.createElement('input');
     var deletebtn = document.createElement('button');
+    var comment = document.createElement('input');
     span.innerHTML = val;
 
     spanDate.innerHTML = today;
@@ -251,7 +252,7 @@
     deletebtn.setAttribute('class', 'deleteButton');
     comment.setAttribute('class', 'commentSection');
     comment.setAttribute('type', 'text');
-    comment.setAttribute('value', 'default');
+    comment.setAttribute('placeholder', 'Comment Here...');
     deletebtn.innerHTML = "Delete Post";
     comment.innerHTML = "Comment Here";
 
@@ -285,15 +286,17 @@
     div2.appendChild(dislikebtn);
     div2.appendChild(deletebtn);
     div2.appendChild(br);
-    div2.appendChild(comment);
     div.appendChild(spanUser);
     div.appendChild(div2);
     div.appendChild(span);
     div.appendChild(br);
     div.appendChild(divDate);
     divDate.appendChild(spanDate);
+    div3.appendChild(comment);
     parentElement.appendChild(br);
+    parentElement.appendChild(div3);
     parentElement.appendChild(div);
+
   }
 
   firebase.database().ref("posts").once("value", function (snapshot) {

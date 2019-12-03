@@ -1,4 +1,7 @@
-
+.commentSection{
+  border-radius:2px;
+  margin-top: 5px;
+}
 .attachimg{
     width: 20px;
 }
