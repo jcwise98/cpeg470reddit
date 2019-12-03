@@ -63,46 +63,70 @@
             title="Close Modal">&times;</span>
 
           <!-- Modal Content -->
-          <form class="modal-content animate" action="/action_page.php">
-            <div class="imgcontainer">
-            </div>
-
-            <div class="container">
-              <label for="email"><b><img
-                    src="https://icon-library.net/images/anonymous-avatar-icon/anonymous-avatar-icon-7.jpg" alt="Avatar"
-                    class="logo"> Email</b></label>
-              <input type="text" placeholder="Enter Email" name="email" required>
-
-              <label for="psw"><b>Password</b></label>
-              <input type="password" placeholder="Enter Password" name="psw" required>
-
-              <button type="submit">Login</button>
-            </div>
-
-            <div class="container">
-                <label for="email"><b><img
-                      src="https://icon-library.net/images/anonymous-avatar-icon/anonymous-avatar-icon-5.jpg" alt="Avatar"
-                      class="logo"> Sign Up</b></label>
-                <input type="text" placeholder="Register Email" name="email" required>
-  
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-  
-                <button type="submit">Register</button>
+          <div class="login">
+            <form class="modal-content animate">
+              <div class="imgcontainer">
               </div>
 
-            <div class="container" style="background-color:#f1f1f1">
-              <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                class="cancelbtn">Cancel</button>
-            </div>
-          </form>
+              <div class="container">
+                <label for="email"><b><img
+                      src="https://icon-library.net/images/anonymous-avatar-icon/anonymous-avatar-icon-7.jpg"
+                      alt="Avatar" class="logo"> Email</b></label>
+                <input type="email" placeholder="Enter Email" name="email" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                <button type="submit">Login</button>
+              </div>
+              <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                  class="cancelbtn">Cancel</button>
+              </div>
+            </form>
+          </div>
         </div>
 
         <button class="btn btn-default" type="button"
           onclick="document.getElementById('modal-logout').style.display='block'">Logout <img
             src="https://icon-library.net/images/log-out-icon/log-out-icon-10.jpg" alt="logo" class="logoo"></button>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
 
+        <button class="btn btn-default" onclick="document.getElementById('id02').style.display='block'">Register <img
+            src="https://www.pinclipart.com/picdir/middle/200-2008697_account-customer-login-man-user-icon-login-icon.png"
+            alt="logo" class="logoo"></button>
+        <!-- The Modal -->
+        <div id="id02" class="modal">
+          <span onclick="document.getElementById('id02').style.display='none'" class="close"
+            title="Close Modal">&times;</span>
+
+          <!-- Modal Content -->
+          <div class="register">
+            <form class="modal-content animate">
+              <div class="imgcontainer">
+              </div>
+              <div class="container">
+                <label for="emailReg"><b><img
+                      src="https://icon-library.net/images/anonymous-avatar-icon/anonymous-avatar-icon-5.jpg"
+                      alt="Avatar" class="logo"> Sign Up</b></label>
+                <input class="email" type="email" placeholder="Register Email" name="emailReg" required>
+
+                <label for="pswReg"><b>Password</b></label>
+                <input class="password" type="password" placeholder="Enter Password" name="pswReg" required>
+
+                <button type="submit">Register</button>
+              </div>
+
+              <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id02').style.display='none'"
+                  class="cancelbtn">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </ul>
     </div>
 
   </nav>
@@ -110,16 +134,15 @@
 
 
   <div class="form-group">
-    <input id="createpost" type="text" class="form-control" placeholder="Create Post" name="search" >
+    <input id="createpost" type="text" class="form-control" placeholder="Create Post" name="search">
   </div>
 
-  <button id="postbutton" class="postbtn btn-default" type="button"
-    onclick="document.getElementById('modal-logout').style.display='block'">Post <img
-      src="https://icon-library.net/images/write-post-icon/write-post-icon-19.jpg"
-      alt="logo" class="logoo"></button>
+  <button id="postbutton" class="postbtn btn-default" type="button">Post
+    <img src="https://icon-library.net/images/write-post-icon/write-post-icon-19.jpg" alt="logo" class="logoo"></button>
 
-      <button id="attachbtn" class="attachButton" type="button">
-      <img src="https://icon-library.net/images/attach-icon-png/attach-icon-png-17.jpg" class="attachimg"> Attach Image</button>
+  <button id="attachbtn" class="attachButton" type="button">
+    <img src="https://icon-library.net/images/attach-icon-png/attach-icon-png-17.jpg" class="attachimg"> Attach
+    Image</button>
 
 
 
@@ -268,7 +291,7 @@
   firebase.database().ref("posts").once("value", function (snapshot) {
     let data = snapshot.val();
     snapshot.forEach(function (post) {
-      readPost(post.val().text, post.val().likes, post.val().id,post.val().date);
+      readPost(post.val().text, post.val().likes, post.val().id, post.val().date);
     });
   });
   firebase.database().ref("posts").on("value", function (snapshot) {
@@ -278,13 +301,22 @@
     });
   });
 
-  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // ...
-});
+  $(".register form").on("submit", function (event) {
+    event.preventDefault();
 
+    var email = $(".register .email").val();
+    var password = $(".register .password").val();
+
+    //console.log(email);
+    //console.log(password);
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(function (user) {
+        console.log(user);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  });
 </script>
 
 </html>
