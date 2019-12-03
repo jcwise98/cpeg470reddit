@@ -239,6 +239,7 @@
     var dislikebtn = document.createElement('button');
     var deletebtn = document.createElement('button');
     var comment = document.createElement('input');
+    var cmntbtn = document.createElement('button');
     span.innerHTML = val;
 
     spanDate.innerHTML = today;
@@ -254,7 +255,9 @@
     comment.setAttribute('type', 'text');
     comment.setAttribute('placeholder', 'Comment Here...');
     deletebtn.innerHTML = "Delete Post";
-    comment.innerHTML = "Comment Here";
+    cmntbtn.innerHTML = "Add";
+    cmntbtn.setAttribute('class', 'addButton');
+
 
 
     likebtn.addEventListener("click", function () {
@@ -291,6 +294,7 @@
     div.appendChild(span);
     div.appendChild(br);
     div.appendChild(divDate);
+    div3.appendChild(cmntbtn);
     divDate.appendChild(spanDate);
     div3.appendChild(comment);
     parentElement.appendChild(br);
