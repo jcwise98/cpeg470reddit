@@ -182,7 +182,7 @@
     likeBtn.innerHTML = likeNum;
   }
 
-  let createPost = function (val) {
+  let createPost = function (val, emailAddr) {
     var rootRef = firebase.database().ref();
     var nextPost;
     rootRef.child("numPosts").once("value", function (snapshot) {
@@ -216,7 +216,8 @@
         text: val,
         likes: 0,
         id: nextPost,
-        date: today
+        date: today,
+        email: emailAddr
       });
       //readPost(val);
       alert("Post has been added!");
@@ -224,18 +225,21 @@
     });
   }
 
-  let readPost = function (val, likeNum, id, today) {
+  let readPost = function (val, likeNum, id, today, email) {
     var parentElement = document.getElementById('post_row');
     var br = document.createElement('br');
     var div = document.createElement('div');
     var div2 = document.createElement('div');
+    var divDate = document.createElement('div');
     var span = document.createElement('span');
     var spanDate = document.createElement('span');
+    var spanUser = document.createElement('span');
     var likebtn = document.createElement('button');
     var dislikebtn = document.createElement('button');
     span.innerHTML = val;
 
     spanDate.innerHTML = today;
+    spanUser.innerHTML = "Posted by: " + email;
     likebtn.innerHTML = likeNum;
     likebtn.setAttribute('style', 'background-color:#EFF9F8');
     likebtn.setAttribute('class', 'likeButton');
@@ -275,10 +279,13 @@
     div2.appendChild(likebtn);
     div2.appendChild(dislikebtn);
     div2.appendChild(deletebtn);
-    div2.appendChild(spanDate);
     div2.appendChild(br);
+    div.appendChild(spanUser);
     div.appendChild(div2);
     div.appendChild(span);
+    div.appendChild(br);
+    div.appendChild(divDate);
+    divDate.appendChild(spanDate);
     parentElement.appendChild(br);
     parentElement.appendChild(div);
   }
@@ -286,7 +293,7 @@
   firebase.database().ref("posts").once("value", function (snapshot) {
     let data = snapshot.val();
     snapshot.forEach(function (post) {
-      readPost(post.val().text, post.val().likes, post.val().id, post.val().date);
+      readPost(post.val().text, post.val().likes, post.val().id, post.val().date, post.val().email);
     });
   });
   firebase.database().ref("posts").on("value", function (snapshot) {
@@ -342,8 +349,9 @@
 
     if (user) {
       console.log(user);
+      var email = user.email;
       $(postbutton).on("click", function () {
-        createPost($('#createpost').val());
+        createPost($('#createpost').val(), email);
       });
     } else {
       // No user is signed in.
