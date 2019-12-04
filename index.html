@@ -233,7 +233,7 @@
     });
   }
 
-  let readPost = function (val, likeNum, id, today, email) {
+  let readPost = function (val, likeNum, id, today, email) {    
     var parentElement = document.getElementById('post_row');
     var br = document.createElement('br');
     var div = document.createElement('div');
@@ -262,6 +262,7 @@
     comment.setAttribute('class', 'commentSection');
     comment.setAttribute('type', 'text');
     comment.setAttribute('placeholder', 'Comment Here...');
+    comment.setAttribute('id', 'commentField');
     deletebtn.innerHTML = "Delete Post";
     cmntbtn.innerHTML = "Add";
     cmntbtn.setAttribute('class', 'addButton');
@@ -293,15 +294,17 @@
     });
     cmntbtn.addEventListener("click", function () {
       var user = firebase.auth().currentUser;
-
+      var ctextField = document.getElementById('commentField').value;
+      console.log(ctextField);
       if (user) {
         var today = returnCurrentDate();
         // User is signed in.
         var CmntRef = firebase.database().ref("posts/" + id).push();
+        var currentCmntUser = firebase.auth().currentUser.email;
         CmntRef.update({
-        text: "comment",
-        date: today,
-        email: email
+        ctext: "fuck you",
+        cdate: today,
+        cemail: currentCmntUser
       });
       } else {
         // No user is signed in.
@@ -314,7 +317,12 @@
 
     div2.appendChild(likebtn);
     div2.appendChild(dislikebtn);
-    div2.appendChild(deletebtn);
+    var user = firebase.auth().currentUser;
+    if(user) {
+      if(user.email == email) {
+        div2.appendChild(deletebtn);
+      }
+    }
     div2.appendChild(br);
     div.appendChild(spanUser);
     div.appendChild(div2);
@@ -324,6 +332,29 @@
     div3.appendChild(cmntbtn);
     divDate.appendChild(spanDate);
     div3.appendChild(comment);
+
+
+    firebase.database().ref("posts/" + id).once("value", function(snapshot) {
+      snapshot.forEach(function(comment) {
+        var cmntDate = comment.val().cdate;
+        var cmntUser = comment.val().cemail;
+        var cmntText = comment.val().ctext;
+        if(cmntDate&&cmntUser&&cmntText) {
+          //console.log(cmntDate);
+          //console.log(cmntUser);
+          //console.log(cmntText);
+          var cmntDiv = document.createElement('div');
+          var cmntUserDiv = document.createElement('div');
+          var cmntTextSpan = document.createElement('span');
+          cmntUserDiv.innerHTML = "Commented by: " + cmntUser + "   " + cmntDate;
+          cmntTextSpan.innerHTML = cmntText;
+          cmntDiv.appendChild(cmntUserDiv);
+          cmntDiv.appendChild(cmntTextSpan);
+          div3.appendChild(cmntDiv);
+        }
+      });
+    });
+
     parentElement.appendChild(br);
     parentElement.appendChild(div3);
     parentElement.appendChild(div);
