@@ -302,7 +302,7 @@
         var CmntRef = firebase.database().ref("posts/" + id).push();
         var currentCmntUser = firebase.auth().currentUser.email;
         CmntRef.update({
-        ctext: "fuck you",
+        ctext: "Can't read from text field lol :/",
         cdate: today,
         cemail: currentCmntUser
       });
